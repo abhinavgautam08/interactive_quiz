@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- Project: Interactive Quiz Challenge | Author: Abhinav Adarsh | Date: 25-03-2026 -->
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Interactive Quiz Challenge</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+  <script src="tailwind-config.js"></script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="bg-background font-body text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+
+  <!-- Immersive Progress Bar - abhinavgautam08 -->
+  <div class="fixed top-0 left-0 w-full h-2 z-[60] bg-surface-container-low">
+    <div id="progress-bar" class="h-full w-0 bg-gradient-to-r from-tertiary to-primary transition-all duration-500">
+    </div>
+  </div>
+
+  <!-- Top Navigation Shell - abhinavgautam08-->
+  <header
+    class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+    <div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary shadow-lg shadow-primary/20">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+        </div>
+        <span class="font-headline text-on-surface tracking-tight font-bold text-xl">Interactive Quiz Challenge</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Canvas - abhinavgautam08 -->
+  <main
+    class="min-h-screen pt-28 pb-32 px-4 flex items-center justify-center bg-gradient-to-br from-surface to-surface-container-low overflow-hidden">
+
+    <!-- Intro Section - abhinavgautam08 -->
+    <div id="intro-container"
+      class="w-full max-w-[700px] bg-surface-container-lowest rounded-xl shadow-[0_32px_48px_-12px_rgba(18,28,42,0.06)] overflow-hidden text-center p-12 z-10 relative">
+      <h1 class="font-headline text-4xl text-on-surface font-bold leading-tight tracking-tight mb-4">Welcome to the Quiz
+      </h1>
+      <p class="font-body text-lg text-on-surface-variant mb-8">Test your knowledge across various tricky topics. Each
+        correct answer gives you 100 points. Are you ready to see how high you can score?</p>
+      <button id="start-btn"
+        class="px-8 py-4 bg-primary text-on-primary rounded-xl font-headline font-bold text-lg shadow-xl shadow-primary/25 hover:bg-primary-container active:scale-95 transition-all w-full max-w-xs mx-auto block cursor-pointer">
+        START QUIZ
+      </button>
+    </div>
+
+    <!-- Editorial Quiz Card - abhinavgautam08 -->
+    <div id="quiz-container"
+      class="w-full max-w-[700px] bg-surface-container-lowest rounded-xl shadow-[0_32px_48px_-12px_rgba(18,28,42,0.06)] overflow-hidden hidden z-10 relative">
+      <!-- Card Header: Metadata -->
+      <div class="px-8 pt-8 pb-4 flex justify-between items-end">
+        <div>
+          <span
+            class="font-label text-on-surface-variant text-[11px] font-semibold uppercase tracking-widest block mb-2">General
+            Knowledge</span>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(0,108,73,0.3)]"></span>
+            <span id="question-progress" class="font-body text-sm font-bold text-on-surface">Question 01 <span
+                class="text-on-surface-variant/40">/ 04</span></span>
+          </div>
+        </div>
+
+        <!-- Score Pill - abhinavgautam08 -->
+        <div
+          class="bg-gradient-to-r from-tertiary to-primary px-4 py-1.5 rounded-full flex items-center gap-2 shadow-lg shadow-primary/20">
+          <span class="material-symbols-outlined text-[18px] text-on-primary"
+            style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+          <span id="score-display" class="text-on-primary font-headline font-bold text-sm tracking-tight">0 pts</span>
+        </div>
+      </div>
+
+      <!-- Question Section - abhinavgautam08 -->
+      <div class="px-8 py-6">
+        <h2 id="question-text"
+          class="font-headline text-2xl md:text-3xl text-on-surface font-bold leading-tight tracking-tight">
+          Loading Question...
+        </h2>
+      </div>
+
+      <!-- Options Stack - abhinavgautam08 -->
+      <div id="options-stack" class="px-8 pb-10 space-y-4">
+        <!-- Dynamic Options injected here -->
+      </div>
+
+      <!-- Action Footer - abhinavgautam08 -->
+      <div class="px-8 py-6 bg-surface-container-low/50 flex justify-end items-center">
+        <button id="next-btn"
+          class="px-8 py-3 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm shadow-xl shadow-primary/25 transition-all opacity-50 cursor-not-allowed"
+          disabled>
+          NEXT QUESTION
+        </button>
+      </div>
+    </div>
+
+    <!-- Result Section - abhinavgautam08 -->
+    <div id="result-container"
+      class="w-full max-w-[700px] bg-surface-container-lowest rounded-xl shadow-[0_32px_48px_-12px_rgba(18,28,42,0.06)] overflow-hidden text-center p-12 hidden z-10 relative">
+      <div
+        class="w-24 h-24 mx-auto bg-gradient-to-br from-secondary to-secondary-container rounded-full flex items-center justify-center mb-6 shadow-xl shadow-secondary/25">
+        <span class="material-symbols-outlined text-center text-on-secondary text-5xl"
+          style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+      </div>
+      <h2 id="result-message"
+        class="font-headline text-4xl text-on-surface font-bold leading-tight tracking-tight mb-2">Excellent!</h2>
+      <p class="font-body text-lg text-on-surface-variant mb-8">You have completed the quiz.</p>
+
+      <div class="bg-surface-container-low rounded-2xl p-6 mb-8 inline-block w-full max-w-sm">
+        <span
+          class="block font-label text-on-surface-variant text-sm font-semibold uppercase tracking-widest mb-1">Final
+          Score</span>
+        <span id="final-score" class="font-headline text-5xl text-primary font-bold">1240</span>
+      </div>
+
+      <div>
+        <button id="restart-btn"
+          class="px-8 py-4 bg-tertiary text-on-primary rounded-xl font-headline font-bold text-lg shadow-xl shadow-tertiary/25 hover:bg-tertiary-container active:scale-95 transition-all w-full max-w-xs mx-auto flex items-center justify-center gap-2 cursor-pointer">
+          <span class="material-symbols-outlined text-on-primary"
+            style="font-variation-settings: 'FILL' 1;">restart_alt</span>
+          RESTART QUIZ
+        </button>
+      </div>
+    </div>
+
+    <!-- Decorative Elements - abhinavgautam08 -->
+    <div class="fixed -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl z-0 pointer-events-none"></div>
+    <div class="fixed -top-24 -right-24 w-96 h-96 bg-secondary/5 rounded-full blur-3xl z-0 pointer-events-none"></div>
+  </main>
+
+</body>
+
+</html>
