@@ -20,8 +20,4 @@ A premium, modern interactive quiz application built with HTML, Tailwind CSS, an
 
 ## 👤 Author
 
-**abhinavgautam08**
-
----
-*Created as part of the To-Do-List development series.*
-# interactive_quiz
+**Abhinav Adarsh**
