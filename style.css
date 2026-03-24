@@ -1,0 +1,51 @@
+/* Custom styles to augment and enhance the Tailwind configuration  -  abhinavgautam08*/
+
+body {
+  transition: background-color 0.3s ease;
+}
+
+.option-btn {
+  /* Transition transform on hover for interactivity -  abhinavgautam08*/
+  transform: translateY(0);
+}
+
+.option-btn:hover {
+  transform: translateY(-2px);
+}
+
+.option-btn:active {
+  transform: translateY(1px) !important;
+}
+
+/* Ensure hidden elements have display none -  abhinavgautam08*/
+.hidden {
+  display: none !important;
+}
+
+/* Smooth fade in for primary container views -  abhinavgautam08*/
+#intro-container, 
+#quiz-container, 
+#result-container {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(16px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Enhancing typography legibility -  abhinavgautam08*/
+p, span, h1, h2, h3, h4, h5, h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#result-message {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
